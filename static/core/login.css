@@ -1,0 +1,12 @@
+:root{ --auth-bg:#050507; }
+.auth-page{ background: radial-gradient(900px 500px at 20% 10%, rgba(255,204,0,.12), transparent 60%),
+                         radial-gradient(900px 500px at 80% 90%, rgba(0,153,255,.10), transparent 60%),
+                         var(--auth-bg); min-height:100vh; }
+.auth-wrap{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+.auth-card{ width:100%; max-width:420px; background: rgba(16,16,22,.92); border:1px solid rgba(255,255,255,.08);
+           border-radius:18px; padding:28px; box-shadow: 0 20px 60px rgba(0,0,0,.55); }
+.auth-logo{ width:140px; height:auto; display:block; margin:0 auto 10px auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,.45)); }
+.auth-title{ font-size:26px; font-weight:800; letter-spacing:.5px; color:#fff; }
+.auth-subtitle{ margin-top:2px; color: rgba(255,255,255,.65); }
+.btn-accent{ background: var(--accent); border-color: var(--accent); color:#111; font-weight:800; }
+.btn-accent:hover{ filter: brightness(.95); }

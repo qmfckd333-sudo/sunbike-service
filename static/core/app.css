@@ -35,3 +35,21 @@ input, select, textarea{
   border-radius:12px;
   padding:10px 12px;
 }
+
+
+/* SUNBIKE UX PATCH */
+.navbar{ background: rgba(0,0,0,.75) !important; backdrop-filter: blur(10px); border-bottom:1px solid var(--border); }
+.navbar .btn{ border-radius:12px; }
+.card{ box-shadow: 0 10px 26px rgba(0,0,0,.25); }
+.form-control, .form-select{ background:#0f0f14; border:1px solid var(--border); color:var(--text); }
+.form-control::placeholder{ color: rgba(255,255,255,.45); }
+.form-select option{ color:#000; }
+.btn-outline-light{ border-color: rgba(255,255,255,.25); color:#fff; }
+.btn-outline-light:hover{ background: rgba(255,255,255,.08); }
+.badge-soft{ background: rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.12); color:#fff; }
+.kpi{ background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); border-radius:14px; padding:14px; display:flex; justify-content:space-between; align-items:center; }
+.kpi .label{ color: rgba(255,255,255,.65); font-size:12px; }
+.kpi .value{ font-weight:800; }
+.table{ color: var(--text); }
+.table thead th{ color: rgba(255,255,255,.65); border-bottom:1px solid var(--border); }
+.table td{ border-top:1px solid rgba(255,255,255,.06); }

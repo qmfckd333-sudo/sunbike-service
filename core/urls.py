@@ -11,4 +11,5 @@ urlpatterns = [
     path("workorders/<int:pk>/labor/add/", views.add_labor, name="add_labor"),
     path("workorders/<int:pk>/payments/add/", views.add_payment, name="add_payment"),
     path("workorders/<int:pk>/invoice.pdf", views.invoice_pdf, name="invoice_pdf"),
+    path("workorders/<int:pk>/status/<str:action>/", views.workorder_status, name="workorder_status"),
 ]

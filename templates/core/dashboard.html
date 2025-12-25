@@ -112,8 +112,7 @@
               {% if o.vehicle.plate_no %}번호판: {{ o.vehicle.plate_no }}{% elif o.vehicle.vin %}VIN: {{ o.vehicle.vin }}{% else %}-{% endif %}
             </div>
           </td>
-          <td class="text-end fw-semibold">{{ o.total_amount|floatformat:0 }}</td>
-          <td class="small-muted">{{ o.in_datetime|date:"Y-m-d H:i" }}</td>
+          <td class="text-end fw-semibold">{{ o.total_amount|floatformat:0 }}</td><td class="small-muted">{{ o.in_datetime|date:"Y-m-d H:i" }}</td><td class="text-end"><div class="d-inline-flex flex-wrap gap-1 justify-content-end"><a class="btn btn-sm btn-outline-light" href="/workorders/{{ o.id }}/"><i class="bi bi-eye"></i> 상세</a><a class="btn btn-sm btn-outline-light" href="/workorders/{{ o.id }}/invoice.pdf"><i class="bi bi-file-earmark-pdf"></i> PDF</a><form method="post" action="/workorders/{{ o.id }}/status/done/" class="d-inline">{% csrf_token %}<button class="btn btn-sm btn-outline-success" type="submit"><i class="bi bi-check2-circle"></i> 완료</button></form><form method="post" action="/workorders/{{ o.id }}/status/paid/" class="d-inline">{% csrf_token %}<button class="btn btn-sm btn-outline-warning" type="submit"><i class="bi bi-cash-coin"></i> 결제</button></form></div></td>
         </tr>
       {% empty %}
         <tr><td colspan="6" class="text-center text-muted py-5">데이터가 없습니다. 상단의 <b>새 접수</b>로 시작하세요.</td></tr>

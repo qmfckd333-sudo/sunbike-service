@@ -116,6 +116,26 @@ def add_payment(request: HttpRequest, pk: int) -> HttpResponse:
 
 
 @login_required
+
+@login_required
+def workorder_status(request: HttpRequest, pk: int, action: str) -> HttpResponse:
+    """작업오더 상태 빠른 변경 (완료/결제) - 직원용"""
+    if request.method != "POST":
+        return HttpResponse(status=405)
+    order = get_object_or_404(WorkOrder, pk=pk)
+    if action == "done":
+        order.status = "done"
+        order.save(update_fields=["status"])
+        messages.success(request, "작업 상태를 '완료'로 변경했습니다.")
+    elif action == "paid":
+        order.status = "paid"
+        order.save(update_fields=["status"])
+        messages.success(request, "작업 상태를 '결제완료'로 변경했습니다.")
+    else:
+        return HttpResponse(status=400)
+    return redirect("dashboard")
+
+
 def invoice_pdf(request: HttpRequest, pk: int) -> HttpResponse:
     """견적서/정비명세서 PDF (썬바이크 흑백 + 로고)"""
     order = get_object_or_404(WorkOrder.objects.select_related("vehicle","vehicle__customer","branch"), pk=pk)
@@ -124,22 +144,12 @@ def invoice_pdf(request: HttpRequest, pk: int) -> HttpResponse:
     c = canvas.Canvas(buf, pagesize=A4)
     W, H = A4
 
-    # --- Font: try Korean (Windows: Malgun Gothic), fallback to Helvetica ---
-    font_name = "Helvetica"
+    # --- Font: Korean-safe (CID) ---
+    font_name = "HYGothic-Medium"
     try:
         from reportlab.pdfbase import pdfmetrics
-        from reportlab.pdfbase.ttfonts import TTFont
-        # common Windows font path
-        candidates = [
-            r"C:\\Windows\\Fonts\\malgun.ttf",
-            r"C:\\Windows\\Fonts\\malgunsl.ttf",
-        ]
-        for fp in candidates:
-            import os
-            if os.path.exists(fp):
-                pdfmetrics.registerFont(TTFont("MalgunGothic", fp))
-                font_name = "MalgunGothic"
-                break
+        from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+        pdfmetrics.registerFont(UnicodeCIDFont(font_name))
     except Exception:
         font_name = "Helvetica"
 
