@@ -1,0 +1,18 @@
+/* SunBike Admin Dark Theme */
+:root { --sb-bg:#0b0f14; --sb-card:#121826; --sb-text:#f5f7ff; --sb-muted:#a7b0c0; --sb-accent:#4da3ff; }
+html, body { background: var(--sb-bg) !important; color: var(--sb-text) !important; }
+#header { background: #000 !important; }
+#branding h1, #branding h1 a { color: var(--sb-text) !important; }
+.module caption, .inline-group h2 { background: #0d1522 !important; color: var(--sb-text) !important; }
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: var(--sb-accent) !important; border: 0 !important; color: #00101f !important;
+  padding: 10px 14px !important; border-radius: 10px !important; font-weight: 700 !important;
+}
+.button:hover, input[type=submit]:hover, a.button:hover { filter: brightness(1.05); }
+#content { background: transparent !important; }
+.breadcrumbs { background: #05070a !important; color: var(--sb-muted) !important; }
+.breadcrumbs a { color: var(--sb-accent) !important; }
+.dashboard #content { background: transparent !important; }
+.form-row, .module, .inline-group { background: var(--sb-card) !important; border-radius: 14px !important; border: 1px solid rgba(255,255,255,0.08) !important; }
+label, .required label { color: var(--sb-text) !important; }
+input, select, textarea { background: #0e1524 !important; color: var(--sb-text) !important; border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 10px !important; }

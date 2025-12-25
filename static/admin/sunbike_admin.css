@@ -1,0 +1,61 @@
+/* SUNBIKE Admin Dark Theme */
+:root{
+  --sunbike-bg:#0b0b0d;
+  --sunbike-panel:#111114;
+  --sunbike-text:#f4f4f6;
+  --sunbike-muted:#b7b7c0;
+  --sunbike-border:#2b2b33;
+  --sunbike-accent:#ffb703; /* warm amber */
+  --sunbike-accent2:#3a86ff; /* blue */
+}
+
+html, body { background: var(--sunbike-bg) !important; color: var(--sunbike-text) !important; }
+#header { background: #0f0f12 !important; border-bottom: 1px solid var(--sunbike-border) !important; }
+#branding .sunbike-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--sunbike-text) !important; }
+#branding .sunbike-logo { height:28px; width:auto; object-fit:contain; }
+#branding .sunbike-title { font-weight:700; letter-spacing:0.3px; }
+
+.module, .app-core, .dashboard-module, .submit-row, .form-row, .breadcrumbs, .content, #content, .content-main{
+  background: transparent !important;
+}
+#content { padding-top: 16px; }
+
+div.module, fieldset.module, .inline-group, .inline-related, .selector, .changelist-filter, #changelist, .results, .object-tools, .submit-row{
+  background: var(--sunbike-panel) !important;
+  border: 1px solid var(--sunbike-border) !important;
+  border-radius: 12px !important;
+  color: var(--sunbike-text) !important;
+}
+
+a, a:visited { color: var(--sunbike-accent2) !important; }
+a:hover { opacity: .9; }
+
+.button, input[type=submit], input[type=button], .submit-row input, .object-tools a{
+  background: var(--sunbike-accent2) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  color: white !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  font-weight: 700 !important;
+}
+
+.button.default, input[type=submit].default{
+  background: var(--sunbike-accent) !important;
+  color: #111 !important;
+}
+
+input, select, textarea{
+  background: #0f0f12 !important;
+  color: var(--sunbike-text) !important;
+  border: 1px solid var(--sunbike-border) !important;
+  border-radius: 10px !important;
+}
+select option { color: #111; } /* dropdown list readability */
+
+.breadcrumbs{ background:#0f0f12 !important; border:1px solid var(--sunbike-border) !important; border-radius:12px !important; }
+table { color: var(--sunbike-text) !important; }
+tr:nth-child(even) { background: rgba(255,255,255,.03) !important; }
+th { color: var(--sunbike-text) !important; }
+
+.errornote, .errorlist { background: rgba(255,0,0,.08) !important; border:1px solid rgba(255,0,0,.18) !important; color: #ffd3d3 !important; }
+

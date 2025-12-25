@@ -1,0 +1,22 @@
+
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i class="bi bi-shield-lock fs-4"></i>
+          <h4 class="mb-0">로그인</h4>
+        </div>
+        <div class="small-muted mb-3">직원 계정으로 접속해 정비 기록을 관리하세요.</div>
+        <form method="post" class="vstack gap-3">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary w-100 py-2"><i class="bi bi-box-arrow-in-right me-1"></i>로그인</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

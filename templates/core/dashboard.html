@@ -1,0 +1,125 @@
+
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="row g-3 align-items-stretch mb-3">
+  <div class="col-lg-7">
+    <div class="card h-100">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h3 class="mb-1">작업오더</h3>
+            <div class="small-muted">접수번호 · 고객전화 · 번호판 · 모델로 빠르게 검색</div>
+          </div>
+          <a class="btn btn-primary" href="/workorders/new/"><i class="bi bi-plus-circle me-1"></i>새 접수</a>
+        </div>
+
+        <form class="row g-2 mt-3">
+          <div class="col-md-9">
+            <input class="form-control" name="q" value="{{ request.GET.q }}" placeholder="예: 20251219-001 / 010-1234-5678 / 12가3456 / PCX">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-outline-light w-100"><i class="bi bi-search me-1"></i>검색</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card h-100">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <i class="bi bi-lightning-charge fs-4"></i>
+          <h5 class="mb-0">바로가기</h5>
+        </div>
+        <div class="row g-2">
+          <div class="col-6">
+            <div class="kpi">
+              <div>
+                <div class="label">고객 등록</div>
+                <div class="value">+ 고객</div>
+              </div>
+              <a class="btn btn-sm btn-outline-light" href="/customers/new/"><i class="bi bi-person-plus"></i></a>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="kpi">
+              <div>
+                <div class="label">차량 등록</div>
+                <div class="value">+ 차량</div>
+              </div>
+              <a class="btn btn-sm btn-outline-light" href="/vehicles/new/"><i class="bi bi-bicycle"></i></a>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="kpi">
+              <div>
+                <div class="label">운영 팁</div>
+                <div class="value">지점(Branch) 먼저 1개 생성</div>
+              </div>
+              <a class="btn btn-sm btn-outline-warning" href="/admin/core/branch/"><i class="bi bi-gear"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-3">
+        <div class="small-muted">
+          <i class="bi bi-info-circle me-1"></i>
+          처음 설치 후에는 <b>관리자(Admin)</b>에서 지점(Branch)을 1개 만들고,
+          그 다음에 작업오더를 생성하세요.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-list-check"></i>
+      <b>최근 작업오더</b>
+    </div>
+    <span class="badge badge-soft">총 {{ orders|length }}건</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th style="min-width:140px;">접수번호</th>
+          <th style="min-width:90px;">상태</th>
+          <th style="min-width:180px;">고객</th>
+          <th style="min-width:160px;">차량</th>
+          <th class="text-end" style="min-width:110px;">총액(원)</th>
+          <th style="min-width:110px;">입고</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for o in orders %}
+        <tr>
+          <td>
+            <a class="fw-semibold" href="/workorders/{{ o.id }}/">{{ o.order_no }}</a>
+            <div class="small-muted">담당: {{ o.assigned_to|default:"-" }}</div>
+          </td>
+          <td><span class="badge badge-soft">{{ o.get_status_display }}</span></td>
+          <td>
+            <div class="fw-semibold">{{ o.vehicle.customer.name }}</div>
+            <div class="small-muted"><i class="bi bi-telephone me-1"></i>{{ o.vehicle.customer.phone }}</div>
+          </td>
+          <td>
+            <div class="fw-semibold">{{ o.vehicle.model }}</div>
+            <div class="small-muted">
+              {% if o.vehicle.plate_no %}번호판: {{ o.vehicle.plate_no }}{% elif o.vehicle.vin %}VIN: {{ o.vehicle.vin }}{% else %}-{% endif %}
+            </div>
+          </td>
+          <td class="text-end fw-semibold">{{ o.total_amount|floatformat:0 }}</td>
+          <td class="small-muted">{{ o.in_datetime|date:"Y-m-d H:i" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6" class="text-center text-muted py-5">데이터가 없습니다. 상단의 <b>새 접수</b>로 시작하세요.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

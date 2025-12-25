@@ -1,0 +1,28 @@
+
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div>
+        <h4 class="mb-1">입력 / 수정</h4>
+        <div class="small-muted">필수 항목(*)을 확인하고 저장하세요.</div>
+      </div>
+      <a class="btn btn-outline-light" href="javascript:history.back()"><i class="bi bi-arrow-left me-1"></i>뒤로</a>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="card">
+        <div class="card-body p-4">
+          {{ form.as_p }}
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-primary px-4"><i class="bi bi-check2-circle me-1"></i>저장</button>
+            <a class="btn btn-outline-light" href="javascript:history.back()"><i class="bi bi-x-circle me-1"></i>취소</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

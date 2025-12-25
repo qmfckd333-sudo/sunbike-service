@@ -1,0 +1,6 @@
+STATIC_URL(웹서비스 환경변수)는 반드시 Static Site 주소로 설정하세요.
+
+예)
+STATIC_URL = https://sunbike-static.onrender.com/
+
+그러면 Django 관리자/앱 정적파일 요청이 전부 static 사이트로 갑니다.

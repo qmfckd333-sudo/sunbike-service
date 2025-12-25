@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}" class="sunbike-brand">
+    <img src="{% static 'core/logo.jpg' %}" alt="썬바이크 로고" class="sunbike-logo">
+    <span class="sunbike-title">썬바이크 관리자</span>
+  </a>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'admin/sunbike_admin.css' %}">
+  <link rel="icon" href="{% static 'core/logo.jpg' %}">
+{% endblock %}
