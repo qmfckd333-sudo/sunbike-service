@@ -1,0 +1,19 @@
+
+/* === SUNBIKE LOGO SIZE FIX === */
+.login-logo,
+.login-logo img,
+.sunbike-logo,
+.header-logo img,
+.topbar-logo img {
+    max-width: 260px;
+    max-height: 56px;
+    width: auto;
+    height: auto;
+    margin: 0 auto 20px auto;
+    display: block;
+}
+
+img[src*="logo"] {
+    max-width: 260px;
+    height: auto;
+}
