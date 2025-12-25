@@ -1,9 +1,10 @@
 {% extends 'core/auth_base.html' %}
+{% load static %}
 {% block content %}
 <div class="auth-wrap">
   <div class="auth-card">
     <div class="text-center mb-3">
-      <img src="/static/core/logo.jpg" class="auth-logo" alt="썬바이크 로고">
+      <img src="{% static 'core/logo.png' %}" class="auth-logo" alt="썬바이크 로고">
       <div class="auth-title">썬바이크</div>
       <div class="auth-subtitle">직원 로그인</div>
     </div>
