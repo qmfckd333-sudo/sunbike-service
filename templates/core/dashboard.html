@@ -13,9 +13,9 @@
           <a class="btn btn-primary" href="/workorders/new/"><i class="bi bi-plus-circle me-1"></i>새 접수</a>
         </div>
 
-        <form class="row g-2 mt-3">
+        <form class="row g-2 mt-3" method="get" id="quickSearchForm">
           <div class="col-md-9">
-            <input class="form-control" name="q" value="{{ request.GET.q }}" placeholder="예: 20251219-001 / 010-1234-5678 / 12가3456 / PCX">
+            <input class="form-control" name="q" value="{{ request.GET.q }}" placeholder="예: 20251219-001 / 010-1234-5678 / 12가3456 / PCX" id="quickSearch" autocomplete="off" placeholder="접수번호 · 고객전화 · 번호판 · 모델" >
           </div>
           <div class="col-md-3">
             <button class="btn btn-outline-light w-100"><i class="bi bi-search me-1"></i>검색</button>
@@ -121,4 +121,41 @@
     </table>
   </div>
 </div>
+
+<script id="SUNBIKE_DASH_UX">
+// 빠른검색: 입력하면 350ms 후 자동 검색 (GET ?q=...)
+(function(){
+  function debounce(fn, ms){
+    let t; return function(){
+      const args=arguments; clearTimeout(t);
+      t=setTimeout(()=>fn.apply(null,args), ms);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function(){
+    const input = document.getElementById("quickSearch");
+    const form  = document.getElementById("quickSearchForm");
+    if(input){
+      input.focus();
+      const run = debounce(function(){
+        if(form) form.submit();
+      }, 350);
+      input.addEventListener("input", run);
+      input.addEventListener("keydown", function(e){
+        if(e.key === "Escape"){ input.value=""; if(form) form.submit(); }
+      });
+    }
+
+    // 행 클릭 → 상세로 이동 (버튼/링크 클릭은 제외)
+    document.querySelectorAll("tr.row-link[data-href]").forEach(function(tr){
+      tr.style.cursor = "pointer";
+      tr.addEventListener("click", function(e){
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+        if(tag === "a" || tag === "button" || e.target.closest("a,button,form,input,select,label")) return;
+        window.location.href = tr.getAttribute("data-href");
+      });
+    });
+  });
+})();
+</script>
+
 {% endblock %}
